@@ -40,9 +40,10 @@
 
         <VerticalStackLayout Grid.Row="3" Padding="10">
             <Button
+                x:Name="btnGetStarted"
                 Grid.Row="3"
                 BackgroundColor="White"
-                Clicked="Button_Clicked"
+                Clicked="btnGetStarted_Clicked"
                 CornerRadius="{StaticResource roundedButton}"
                 FontAttributes="Bold"
                 Text="Get Started"

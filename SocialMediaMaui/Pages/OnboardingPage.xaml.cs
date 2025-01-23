@@ -7,8 +7,8 @@ public partial class OnboardingPage : ContentPage
 		InitializeComponent();
 	}
 
-    private void Button_Clicked(object sender, EventArgs e)
-    {
-
-    }
+	private async void btnGetStarted_Clicked(object sender, EventArgs e)
+	{
+		await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+	}
 }
