@@ -4,12 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:SocialMediaMaui.Pages"
-    Shell.BackgroundColor="{StaticResource Primary}"
-    Shell.ForegroundColor="White"
-    Shell.FlyoutBehavior="Disabled"
-    Shell.TitleColor="White"
     Title="SocialMediaMaui"
-    Shell.NavBarHasShadow="True">
+    Shell.BackgroundColor="{StaticResource Primary}"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.ForegroundColor="White"
+    Shell.NavBarHasShadow="True"
+    Shell.TitleColor="White">
 
     <ShellContent
         Title="Onboarding Page"

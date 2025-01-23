@@ -1,37 +1,52 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SocialMediaMaui.Pages.OnboardingPage"
-             Shell.NavBarIsVisible="False"
-             BackgroundColor="{StaticResource Primary}">
+<ContentPage
+    x:Class="SocialMediaMaui.Pages.OnboardingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{StaticResource Primary}"
+    Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="*, Auto, *, Auto">
 
-        <Grid RowDefinitions="Auto, Auto, Auto" 
-              HorizontalOptions="Center" Grid.Row="1" RowSpacing="10">
-            <Image Source="social_media.png"/>
-            <Label Grid.Row="1" Text="Hello there!"
-                   HorizontalOptions="Center"
-                   TextColor="White"
-                   FontSize="25"
-                   FontAttributes="Bold"/>
+        <Grid
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            RowDefinitions="Auto, Auto, Auto"
+            RowSpacing="10">
+            <Image Source="social_media.png" />
+            <Label
+                Grid.Row="1"
+                FontAttributes="Bold"
+                FontSize="25"
+                HorizontalOptions="Center"
+                Text="Hello there!"
+                TextColor="White" />
             <VerticalStackLayout Grid.Row="2" Spacing="10">
-                <Label Text="Welcome to this" FontSize="25" 
-                       FontAttributes="Bold" HorizontalOptions="Center" TextColor="White"/>
-                <Label Text="Social Media App" FontSize="30"
-                       FontAttributes="Bold" HorizontalOptions="Center" TextColor="White"/>
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="25"
+                    HorizontalOptions="Center"
+                    Text="Welcome to this"
+                    TextColor="White" />
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="30"
+                    HorizontalOptions="Center"
+                    Text="Social Media App"
+                    TextColor="White" />
             </VerticalStackLayout>
 
         </Grid>
 
         <VerticalStackLayout Grid.Row="3" Padding="10">
-            <Button Grid.Row="3" Text="Get Started"
+            <Button
+                Grid.Row="3"
                 BackgroundColor="White"
-                    CornerRadius="{ StaticResource roundedButton }"
-                    FontAttributes="Bold"
-                TextColor="{StaticResource Primary}"
-                
-                />
+                Clicked="Button_Clicked"
+                CornerRadius="{StaticResource roundedButton}"
+                FontAttributes="Bold"
+                Text="Get Started"
+                TextColor="{StaticResource Primary}" />
 
         </VerticalStackLayout>
 
