@@ -21,6 +21,11 @@
         ContentTemplate="{DataTemplate pages:LoginPage}"
         Route="LoginPage" />
 
+    <!--<ShellContent
+        Title="Register Page"
+        ContentTemplate="{DataTemplate pages:RegisterPage}"
+        Route="RegisterPage" />-->
+
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate pages:HomePage}"

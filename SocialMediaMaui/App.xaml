@@ -3,6 +3,7 @@
     x:Class="SocialMediaMaui.App"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SocialMediaMaui.Controls"
     xmlns:local="clr-namespace:SocialMediaMaui">
     <Application.Resources>
         <ResourceDictionary>
@@ -24,6 +25,10 @@
                         <Setter Property="Color" Value="{StaticResource Primary}" />
                         <Setter Property="Opacity" Value="0.2" />
                         <Setter Property="Margin" Value="0,2,0,0" />
+                    </Style>
+
+                    <Style TargetType="controls:NoBorderEntry">
+                        <Setter Property="BackgroundColor" Value="LightGoldenrodYellow" />
                     </Style>
 
                 </ResourceDictionary>

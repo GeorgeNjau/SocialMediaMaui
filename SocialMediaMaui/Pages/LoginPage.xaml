@@ -26,20 +26,18 @@
 
             <VerticalStackLayout Grid.Row="2" Spacing="2">
                 <Label Style="{StaticResource formLabel}" Text="Username" />
-                <controls:NoBorderEntry BackgroundColor="LightGoldenrodYellow" Placeholder="Enter user name" />
+                <controls:NoBorderEntry Placeholder="Enter user name" />
 
                 <controls:Spacer />
 
                 <Label Style="{StaticResource formLabel}" Text="Password" />
-                <controls:NoBorderEntry
-                    BackgroundColor="LightGoldenrodYellow"
-                    IsPassword="True"
-                    Placeholder="Enter password" />
+                <controls:NoBorderEntry IsPassword="True" Placeholder="Enter password" />
 
                 <controls:Spacer />
 
                 <Button
                     x:Name="btnLogin"
+                    Clicked="btnLogin_Clicked"
                     Style="{StaticResource roundedButton}"
                     Text="Login" />
 
@@ -58,6 +56,7 @@
 
                 <Button
                     x:Name="btnRegister"
+                    Clicked="btnRegister_Clicked"
                     Style="{StaticResource roundedButton}"
                     Text="Register" />
 

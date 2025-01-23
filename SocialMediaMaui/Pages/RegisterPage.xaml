@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SocialMediaMaui.Pages.RegisterPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SocialMediaMaui.Controls"
+    Title="Register"
+    Padding="20">
+    <ScrollView>
+        <Grid
+            RowDefinitions="Auto,Auto,Auto"
+            RowSpacing="20"
+            VerticalOptions="Center">
+            <Image
+                Grid.Row="0"
+                HeightRequest="128"
+                Source="social_media.png" />
+
+            <Label
+                Grid.Row="1"
+                FontAttributes="Bold"
+                FontSize="25"
+                HorizontalOptions="Center"
+                Text="Register" />
+
+            <VerticalStackLayout Grid.Row="2" Spacing="2">
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                    <Border
+                        BackgroundColor="LightGoldenrodYellow"
+                        HeightRequest="80"
+                        StrokeShape="RoundRectangle 40"
+                        WidthRequest="80">
+                        <Image
+                            x:Name="btnPhoto"
+                            Aspect="Center"
+                            HeightRequest="80"
+                            Source="user.png"
+                            WidthRequest="80" />
+                    </Border>
+                    <Button Text="Choose photo" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <controls:Spacer Space="2" />
+
+                <Label Style="{StaticResource formLabel}" Text="Name" />
+                <controls:NoBorderEntry Placeholder="Enter name" />
+
+                <controls:Spacer Space="5" />
+
+                <Label Style="{StaticResource formLabel}" Text="Email Address" />
+                <controls:NoBorderEntry Placeholder="Enter email address" />
+
+                <controls:Spacer Space="5" />
+
+                <Label Style="{StaticResource formLabel}" Text="Password" />
+                <controls:NoBorderEntry IsPassword="True" Placeholder="Enter password" />
+
+                <controls:Spacer Space="5" />
+
+                <Label Style="{StaticResource formLabel}" Text="Confirm Password" />
+                <controls:NoBorderEntry IsPassword="True" Placeholder="Confirm Password" />
+
+                <controls:Spacer Space="10" />
+
+                <Button
+                    x:Name="btnRegister"
+                    Style="{StaticResource roundedButton}"
+                    Text="Register" />
+
+                <controls:Spacer Space="10" />
+
+                <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="5">
+                    <BoxView Grid.Column="0" Style="{StaticResource fadedLine}" />
+                    <Label
+                        Grid.Column="1"
+                        HorizontalOptions="Center"
+                        Text="Existing User?" />
+                    <BoxView Grid.Column="2" Style="{StaticResource fadedLine}" />
+                </Grid>
+
+                <controls:Spacer Space="10" />
+
+                <Button
+                    x:Name="btnLogin"
+                    Clicked="btnLogin_Clicked"
+                    Style="{StaticResource roundedButton}"
+                    Text="Login" />
+
+            </VerticalStackLayout>
+
+        </Grid>
+
+    </ScrollView>
+
+</ContentPage>
