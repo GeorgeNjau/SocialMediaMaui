@@ -2,34 +2,56 @@
 <ContentPage
     x:Class="SocialMediaMaui.Pages.HomePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SocialMediaMaui.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="30,0" Spacing="25">
-            <Image
-                Aspect="AspectFit"
-                HeightRequest="185"
-                SemanticProperties.Description="dot net bot in a hovercraft number nine"
-                Source="dotnet_bot.png" />
-
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="Auto, *, Auto">
             <Label
-                SemanticProperties.HeadingLevel="Level1"
-                Style="{StaticResource Headline}"
-                Text="Hello, World!" />
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontSize="25"
+                Text="Maui Social"
+                TextColor="White"
+                VerticalOptions="Center" />
 
-            <Label
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                SemanticProperties.HeadingLevel="Level2"
-                Style="{StaticResource SubHeadline}"
-                Text="Welcome to &#10;.NET Multi-platform App UI" />
+            <Grid
+                Grid.Column="2"
+                Margin="0,0,15,0"
+                ColumnDefinitions="*,*,*"
+                ColumnSpacing="20"
+                VerticalOptions="Center">
 
-            <Button
-                x:Name="CounterBtn"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Text="Click me" />
-        </VerticalStackLayout>
-    </ScrollView>
+                <controls:WhiteImage
+                    HeightRequest="20"
+                    Source="plus.png"
+                    WidthRequest="20" />
+
+                <Grid Grid.Column="1">
+                    <controls:WhiteImage
+                        HeightRequest="20"
+                        Source="bell.png"
+                        WidthRequest="20" />
+
+                    <Ellipse
+                        Fill="Black"
+                        HeightRequest="10"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start"
+                        WidthRequest="10" />
+
+                </Grid>
+
+                <controls:WhiteImage
+                    Grid.Column="2"
+                    HeightRequest="20"
+                    Source="user.png"
+                    WidthRequest="20" />
+
+            </Grid>
+
+        </Grid>
+    </Shell.TitleView>
 
 </ContentPage>
