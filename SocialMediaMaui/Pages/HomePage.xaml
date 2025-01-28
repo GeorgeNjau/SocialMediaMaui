@@ -196,6 +196,10 @@
 
                     </Grid>
 
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Border.GestureRecognizers>
+
                 </Border>
 
                 <Border Padding="8" BackgroundColor="White">

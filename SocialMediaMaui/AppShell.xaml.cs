@@ -14,6 +14,7 @@ public partial class AppShell : Shell
     private static void RegisterRoutes()
     {
         Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+        Routing.RegisterRoute(nameof(PostDetailPage), typeof(PostDetailPage));
     }
 
 }

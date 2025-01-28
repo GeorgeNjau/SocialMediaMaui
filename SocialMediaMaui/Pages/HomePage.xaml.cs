@@ -9,4 +9,8 @@ public partial class HomePage : ContentPage
         InitializeComponent();
     }
 
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(PostDetailPage), animate: true);
+    }
 }
