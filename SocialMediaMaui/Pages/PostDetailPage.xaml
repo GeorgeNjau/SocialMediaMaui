@@ -32,6 +32,10 @@
                     <Shadow Brush="Gray" Radius="10" />
                 </Border.Shadow>
 
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Border.GestureRecognizers>
+
             </Border>
 
             <Border
@@ -441,7 +445,7 @@
                         </Grid>
 
                     </Grid>
-                
+
                 </VerticalStackLayout>
 
             </Grid>
