@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SocialMediaMaui.Pages.AddPostPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SocialMediaMaui.Controls"
+    Title="Add new post"
+    Padding="15">
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto, *, Auto, Auto" RowSpacing="5">
+            <Grid
+                Padding="8,0"
+                ColumnDefinitions="40, Auto, *"
+                ColumnSpacing="5">
+                <Border
+                    Grid.Column="0"
+                    BackgroundColor="LightGoldenrodYellow"
+                    HeightRequest="40"
+                    StrokeShape="RoundRectangle 20"
+                    WidthRequest="40">
+                    <Image
+                        Aspect="AspectFill"
+                        HeightRequest="30"
+                        HorizontalOptions="Center"
+                        Source="user.png"
+                        VerticalOptions="Center"
+                        WidthRequest="30" />
+                </Border>
+
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    Text="George Njau"
+                    VerticalOptions="Center" />
+
+            </Grid>
+
+            <controls:NoBorderEditor
+                Grid.Row="1"
+                BackgroundColor="LightGoldenrodYellow"
+                Placeholder="Start Typing..." />
+
+
+
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

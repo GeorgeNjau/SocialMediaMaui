@@ -25,12 +25,18 @@
                 VerticalOptions="Center">
 
                 <controls:WhiteImage
+                    x:Name="newPostImage"
                     HeightRequest="20"
                     Source="plus.png"
-                    WidthRequest="20" />
+                    WidthRequest="20">
+                    <controls:WhiteImage.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="NewPostImage_Tapped" />
+                    </controls:WhiteImage.GestureRecognizers>
+                </controls:WhiteImage>
 
                 <Grid Grid.Column="1">
                     <controls:WhiteImage
+                        x:Name="notifyImage"
                         HeightRequest="20"
                         Source="bell.png"
                         WidthRequest="20" />

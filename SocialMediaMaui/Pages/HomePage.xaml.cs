@@ -13,4 +13,9 @@ public partial class HomePage : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(PostDetailPage), animate: true);
     }
+
+    private async void NewPostImage_Tapped(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(AddPostPage), animate: true);
+    }
 }
