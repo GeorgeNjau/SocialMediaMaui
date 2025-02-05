@@ -41,8 +41,50 @@
                 BackgroundColor="LightGoldenrodYellow"
                 Placeholder="Start Typing..." />
 
+            <Grid Grid.Row="2">
+                <Border BackgroundColor="LightSalmon" StrokeThickness="0">
+                    <Image HeightRequest="250" Source="bird_1.jpg" />
+                </Border>
+                <Border
+                    Margin="1"
+                    BackgroundColor="{StaticResource Primary}"
+                    HeightRequest="40"
+                    HorizontalOptions="End"
+                    StrokeShape="RoundRectangle 5"
+                    StrokeThickness="0"
+                    VerticalOptions="Start"
+                    WidthRequest="40">
+                    <controls:WhiteImage
+                        HeightRequest="18"
+                        Source="trash.png"
+                        WidthRequest="18" />
+                    <Border.Shadow>
+                        <Shadow />
+                    </Border.Shadow>
+                </Border>
+            </Grid>
 
-
+            <FlexLayout
+                Grid.Row="3"
+                Padding="0,0,2,0"
+                JustifyContent="SpaceBetween">
+                <Border
+                    Padding="15,0"
+                    Stroke="{StaticResource Primary}"
+                    StrokeShape="RoundRectangle 5">
+                    <HorizontalStackLayout Spacing="5">
+                        <controls:PrimaryColorImage
+                            HeightRequest="25"
+                            Source="photo.png"
+                            WidthRequest="25" />
+                        <Label Text="Add Photo" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+                <Button
+                    Style="{StaticResource roundedButton}"
+                    Text="Post"
+                    WidthRequest="120" />
+            </FlexLayout>
 
         </Grid>
     </ScrollView>
