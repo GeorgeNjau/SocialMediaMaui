@@ -1,71 +1,103 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="SocialMediaMaui.Pages.HomePage"
+    x:Class="SocialMediaMaui.Pages.ProfilePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:SocialMediaMaui.Controls"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="My Profile"
     BackgroundColor="{StaticResource Gray100}">
 
-    <Shell.TitleView>
-        <Grid ColumnDefinitions="Auto, *, Auto">
-            <Label
-                Grid.Column="0"
-                FontAttributes="Bold"
-                FontSize="25"
-                Text="Maui Social"
-                TextColor="White"
-                VerticalOptions="Center" />
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="power_off.png" />
+    </ContentPage.ToolbarItems>
 
-            <Grid
-                Grid.Column="2"
-                Margin="0,0,15,0"
-                ColumnDefinitions="*,*,*"
-                ColumnSpacing="20"
-                VerticalOptions="Center">
+    <Grid RowDefinitions="Auto, *">
 
-                <controls:WhiteImage
-                    x:Name="newPostImage"
-                    HeightRequest="20"
-                    Source="plus.png"
-                    WidthRequest="20">
-                    <controls:WhiteImage.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="NewPostImage_Tapped" />
-                    </controls:WhiteImage.GestureRecognizers>
-                </controls:WhiteImage>
+        <VerticalStackLayout
+            Grid.Row="0"
+            Padding="15,10,15,8"
+            Spacing="5">
+            <Grid>
+                <Border
+                    BackgroundColor="White"
+                    HeightRequest="70"
+                    StrokeShape="RoundRectangle 70"
+                    WidthRequest="70">
+                    <Image
+                        HorizontalOptions="Center"
+                        Source="user.png"
+                        VerticalOptions="Center" />
+                </Border>
 
-                <Grid Grid.Column="1">
+                <Border
+                    Margin="0,0,-50,0"
+                    BackgroundColor="{StaticResource Primary}"
+                    HeightRequest="24"
+                    StrokeShape="RoundRectangle 12"
+                    StrokeThickness="0"
+                    VerticalOptions="End"
+                    WidthRequest="24">
+
                     <controls:WhiteImage
-                        x:Name="notifyImage"
-                        HeightRequest="20"
-                        Source="bell.png"
-                        WidthRequest="20" />
+                        HeightRequest="12"
+                        HorizontalOptions="Center"
+                        Source="pencil.png"
+                        VerticalOptions="Center"
+                        WidthRequest="12" />
+                    <Border.Shadow>
+                        <Shadow />
+                    </Border.Shadow>
 
-                    <Ellipse
-                        Fill="Black"
-                        HeightRequest="10"
-                        HorizontalOptions="End"
-                        VerticalOptions="Start"
-                        WidthRequest="10" />
-
-                </Grid>
-
-                <controls:WhiteImage
-                    Grid.Column="2"
-                    HeightRequest="20"
-                    Source="user.png"
-                    WidthRequest="20">
-                    <controls:WhiteImage.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="GoToProfilePage_Tapped" />
-                    </controls:WhiteImage.GestureRecognizers>
-                </controls:WhiteImage>
+                </Border>
 
             </Grid>
 
-        </Grid>
-    </Shell.TitleView>
-    <Grid>
-        <ScrollView>
+            <controls:Spacer Space="10" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="George Kamau" />
+
+            <Label
+                FontSize="16"
+                HorizontalOptions="Center"
+                Text="email@email.com" />
+
+            <BoxView Style="{StaticResource fadedLine}" />
+
+            <Border
+                HeightRequest="30"
+                Stroke="{StaticResource Primary}"
+                StrokeShape="RoundRectangle 15"
+                StrokeThickness="0.5">
+                <Grid ColumnDefinitions="*,*">
+                    <Border
+                        Grid.Column="0"
+                        BackgroundColor="{StaticResource Primary}"
+                        StrokeThickness="0">
+                        <Label
+                            HorizontalOptions="Center"
+                            Text="My Posts"
+                            TextColor="White"
+                            VerticalOptions="Center" />
+                    </Border>
+                    <Border
+                        Grid.Column="1"
+                        BackgroundColor="White"
+                        StrokeThickness="0">
+                        <Label
+                            HorizontalOptions="Center"
+                            Text="Saved"
+                            TextColor="{StaticResource Primary}"
+                            VerticalOptions="Center" />
+                    </Border>
+                </Grid>
+            </Border>
+
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1">
 
             <VerticalStackLayout Spacing="15">
 
@@ -205,10 +237,6 @@
                         </VerticalStackLayout>
 
                     </Grid>
-
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                    </Border.GestureRecognizers>
 
                 </Border>
 
@@ -491,38 +519,7 @@
                 </Border>
 
             </VerticalStackLayout>
-
         </ScrollView>
-
-        <Border
-            x:Name="floatingButton"
-            Margin="0,5"
-            BackgroundColor="{StaticResource Primary}"
-            HeightRequest="45"
-            HorizontalOptions="Center"
-            StrokeShape="RoundRectangle 10"
-            StrokeThickness="0"
-            VerticalOptions="End"
-            WidthRequest="45">
-
-            <controls:WhiteImage
-                HeightRequest="24"
-                Source="plus_fab.png"
-                WidthRequest="24" />
-
-            <Border.Shadow>
-                <Shadow Brush="Black" Radius="25" />
-            </Border.Shadow>
-
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5, 1">
-                    <GradientStop Offset="0.1" Color="{StaticResource Primary}" />
-                    <GradientStop Offset="1.0" Color="{StaticResource PrimaryDark}" />
-                </LinearGradientBrush>
-            </Border.Background>
-
-        </Border>
-
 
     </Grid>
 
