@@ -39,7 +39,11 @@
                         x:Name="notifyImage"
                         HeightRequest="20"
                         Source="bell.png"
-                        WidthRequest="20" />
+                        WidthRequest="20">
+                        <controls:WhiteImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="GoToNotificationPage_Tapped" />
+                        </controls:WhiteImage.GestureRecognizers>
+                    </controls:WhiteImage>
 
                     <Ellipse
                         Fill="Black"
