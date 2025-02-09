@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaMaui", "SocialMediaMaui\SocialMediaMaui.csproj", "{D7E4592D-7952-466A-898B-4FE22A56BF7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaMaui.Api", "SocialMediaMaui.Api\SocialMediaMaui.Api.csproj", "{7C1EFE99-050D-4E3E-89DB-53F23C3983BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,6 +18,10 @@ Global
 		{D7E4592D-7952-466A-898B-4FE22A56BF7C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{D7E4592D-7952-466A-898B-4FE22A56BF7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7E4592D-7952-466A-898B-4FE22A56BF7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C1EFE99-050D-4E3E-89DB-53F23C3983BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C1EFE99-050D-4E3E-89DB-53F23C3983BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C1EFE99-050D-4E3E-89DB-53F23C3983BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C1EFE99-050D-4E3E-89DB-53F23C3983BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
