@@ -20,4 +20,8 @@
     <ProjectReference Include="..\SocialMediaMaui.Shared\SocialMediaMaui.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

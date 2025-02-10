@@ -34,7 +34,7 @@ namespace SocialMediaMaui.Api.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BookMarks");
+                    b.ToTable("BookMarks", (string)null);
                 });
 
             modelBuilder.Entity("SocialMediaMaui.Api.Data.Entities.Comment", b =>
@@ -62,7 +62,7 @@ namespace SocialMediaMaui.Api.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("SocialMediaMaui.Api.Data.Entities.Like", b =>
@@ -77,7 +77,7 @@ namespace SocialMediaMaui.Api.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Likes");
+                    b.ToTable("Likes", (string)null);
                 });
 
             modelBuilder.Entity("SocialMediaMaui.Api.Data.Entities.Notification", b =>
@@ -106,7 +106,7 @@ namespace SocialMediaMaui.Api.Data.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notifications", (string)null);
                 });
 
             modelBuilder.Entity("SocialMediaMaui.Api.Data.Entities.Post", b =>
@@ -146,7 +146,7 @@ namespace SocialMediaMaui.Api.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("SocialMediaMaui.Api.Data.Entities.User", b =>
@@ -179,7 +179,7 @@ namespace SocialMediaMaui.Api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("SocialMediaMaui.Api.Data.Entities.BookMark", b =>
