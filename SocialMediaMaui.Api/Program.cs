@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SocialMediaMaui.Api.Data;
+using SocialMediaMaui.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddTransient<AuthService>();
 
 var app = builder.Build();
 

@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SocialMediaMaui.Api.Data;
 using SocialMediaMaui.Api.Data.Entities;
 using SocialMediaMaui.Shared.Dtos;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace SocialMediaMaui.Api.Services
 {
@@ -96,6 +99,52 @@ namespace SocialMediaMaui.Api.Services
             var photoUrl = $"{domainUrl}/uploads/images/users/{newPhotoName}";
 
             return (fullPhotoPath, photoUrl);
+        }
+
+        public async Task<ApiResult<LoginResponseDto>> LoginAsync(LoginDto loginDto)
+        {
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
+
+            if (user is null)
+                return ApiResult<LoginResponseDto>.Fail("User does not exist");
+
+            var passwordVerificationResult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginDto.Password);
+
+            if (passwordVerificationResult != PasswordVerificationResult.Success)
+                return ApiResult<LoginResponseDto>.Fail("Invalid credentials provided");
+
+            var jwt = GenerateJwtToken(user);
+
+            var loggedInUser = new LoggedInUser(user.Id, user.Name, user.Name, user.PhotoUrl);
+            var loginResponse = new LoginResponseDto(loggedInUser, jwt);
+
+            return ApiResult<LoginResponseDto>.Success(loginResponse);
+        }
+             
+        private string GenerateJwtToken(User user)
+        {
+            Claim[] claims = [
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim("UserPhotoUrl", user.PhotoUrl ?? "")
+                ];
+
+            var secretKey = configuration.GetValue<string>("Jwt:SecretKey");
+            var securityKey = System.Text.Encoding.UTF8.GetBytes(secretKey);
+            var symetricKey = new SymmetricSecurityKey(securityKey);
+            var signinCredentials = new SigningCredentials(symetricKey, SecurityAlgorithms.HmacSha256);
+
+            var jwtSecurityToken = new JwtSecurityToken(signingCredentials: signinCredentials,
+                issuer: configuration.GetValue<string>("Jwt:Issuer"),
+                expires: DateTime.Now.AddMinutes(configuration.GetValue<int>("Jwt:ExpireInMinutes")),
+                claims: claims
+                );
+
+            var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+
+            return token;
+
         }
 
     }
