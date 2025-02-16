@@ -13,8 +13,6 @@ namespace SocialMediaMaui.Api.Data.Entities
 
         public string? Content { get; set; }
 
-        [MaxLength(300)]
-        public required string PasswordHash { get; set; }
 
         [Comment("Physical path of the image.")] // To enable move or delete the image from the device
         public string? PhotoPath { get; set; }
