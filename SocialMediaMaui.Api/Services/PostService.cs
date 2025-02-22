@@ -165,6 +165,73 @@ namespace SocialMediaMaui.Api.Services
 
         }
 
+        public async Task<ApiResult<CommentDto>> SaveCommentAsync(SaveCommentDto dto, LoggedInUser currentUser)
+        {
+            Comment? comment = null;
+
+            if (dto.CommentId == Guid.Empty)
+            {
+                comment = new Comment { Content = dto.Content, AddedOn = DateTime.UtcNow, PostId = dto.PostId, UserId = currentUser.Id };
+                context.Comments.Add(comment);
+            }
+            else
+            {
+                comment = await context.Comments.FindAsync(dto.CommentId);
+
+                if (comment is null)
+                    return ApiResult<CommentDto>.Fail("Comment not found");
+
+                if (comment.UserId != currentUser.Id)
+                    return ApiResult<CommentDto>.Fail("You can modify your own comments only.");
+
+                comment.Content = dto.Content;
+
+                context.Comments.Update(comment);
+            }
+
+            try
+            {
+                await context.SaveChangesAsync();
+
+                var commentDto = new CommentDto
+                {
+                    AddedOn = comment.AddedOn,
+                    CommentId = comment.Id,
+                    Content = comment.Content,
+                    PostId = comment.PostId,
+                    UserId = currentUser.Id,
+                    UserName = currentUser.Name,
+                    UserPhotoUrl = currentUser.PhotoUrl
+                };
+
+                return ApiResult<CommentDto>.Success(commentDto);
+            }
+            catch (Exception ex)
+            {
+                return ApiResult<CommentDto>.Fail(ex.Message);
+            }
+
+        }
+
+        public async Task<CommentDto[]> GetPostCommentsAsync(Guid postId, int startIndex, int pageSize) =>
+        
+            await context.Comments.Where(c => c.PostId == postId)
+                .OrderByDescending(c => c.AddedOn)
+                .Skip(startIndex)
+                .Take(pageSize)
+                .Select(c => new CommentDto
+                {
+                    Content = c.Content,
+                    AddedOn = c.AddedOn,
+                    CommentId = c.Id,
+                    PostId = c.PostId,
+                    UserId = c.UserId,
+                    UserName = c.User.Name,
+                    UserPhotoUrl = c.User.PhotoUrl
+                })
+                .ToArrayAsync();
+        
+        
 
 
     }
