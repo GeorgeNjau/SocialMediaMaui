@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
 using SocialMediaMaui.Api.Data;
 using SocialMediaMaui.Api.Data.Entities;
 using SocialMediaMaui.Shared.Dtos;
@@ -85,7 +84,7 @@ namespace SocialMediaMaui.Api.Services
 
                 return ApiResult.Success();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return ApiResult.Fail(ex.Message);
             }
@@ -114,6 +113,59 @@ namespace SocialMediaMaui.Api.Services
 
             return (fullPhotoPath, photoUrl);
         }
+
+        //public async Task<PostDto[]> GetPostDtosAsync(int startIndex, int pageSize, Guid currentUserId)
+        //{
+        //    var posts = await context.Posts
+        //        .Include(p => p.User)
+        //        .Where(c => c.IsDelete == false)
+        //        .OrderByDescending(b => b.PostDate)
+        //        .Select(p => new PostDto
+        //        {
+        //            Content = p.Content,
+        //            ModifiedOn = p.ModifiedOn,
+        //            PhotoUrl = p.PhotoUrl,
+        //            PostId = p.Id,
+        //            PostedOn = p.PostDate,
+        //            UserId = currentUserId,
+        //            UserName = p.User.Name,
+        //            UserPhotoUrl = p.User.PhotoUrl
+        //        })
+        //        .Skip(startIndex)
+        //        .Take(pageSize).ToArrayAsync();
+
+        //    var postIds = posts.Select(p => p.PostId).ToArray();
+        //    var postsLikedByThisUser = await context.Likes
+        //                                .Where(l => l.UserId == currentUserId && postIds.Contains(l.PostId))
+        //                                .Select(l=> l.PostId)
+        //                                .ToArrayAsync();
+
+        //    var postsSavedByThisUser = await context.BookMarks
+        //                              .Where(l => l.UserId == currentUserId && postIds.Contains(l.PostId))
+        //                              .Select(l => l.PostId)
+        //                              .ToArrayAsync();
+
+        //    foreach (var post in posts)
+        //    {
+        //        post.IsBookMarked = postsSavedByThisUser.Contains(post.PostId);
+        //        post.IsLiked = postsLikedByThisUser.Contains(post.PostId);
+        //    }
+
+        //    return posts;
+        //}
+
+
+        public async Task<PostDto[]> GetPostDtosAsync(int startIndex, int pageSize, Guid currentUserId)
+        {
+           var posts = await context.Set<PostDto>()
+                .FromSqlInterpolated($"EXEC GetPosts @StartIndex = {startIndex}, @PageSize={pageSize}, @CurrentUserId = {currentUserId}")
+                .ToArrayAsync();
+
+            return posts;
+
+        }
+
+
 
     }
 }

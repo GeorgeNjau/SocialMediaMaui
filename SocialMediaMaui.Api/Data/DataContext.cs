@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SocialMediaMaui.Api.Data.Entities;
+using SocialMediaMaui.Shared.Dtos;
 
 namespace SocialMediaMaui.Api.Data
 {
@@ -24,6 +25,8 @@ namespace SocialMediaMaui.Api.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<PostDto>().HasNoKey();
 
             modelBuilder.Entity<BookMark>(e =>
             {

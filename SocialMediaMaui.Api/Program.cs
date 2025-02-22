@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SocialMediaMaui.Api.Data;
+using SocialMediaMaui.Api.Data.Entities;
 using SocialMediaMaui.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +17,14 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddTransient<AuthService>()
-                .AddTransient<PostService>();
+                .AddTransient<PostService>()
+                .AddTransient<IPasswordHasher<User>, PasswordHasher<User>>();
 
 var app = builder.Build();
+
+#if DEBUG
+AutoMigrateDb(app.Services);
+#endif
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -29,3 +36,14 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.Run();
+
+
+static void AutoMigrateDb(IServiceProvider provider)
+{
+    var scope = provider.CreateScope();
+    var dataContext = scope.ServiceProvider.GetRequiredService<DataContext>();
+    if(dataContext.Database.GetPendingMigrations().Any())
+    {
+        dataContext.Database.Migrate();
+    }
+}
