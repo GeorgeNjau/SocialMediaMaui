@@ -230,8 +230,104 @@ namespace SocialMediaMaui.Api.Services
                     UserPhotoUrl = c.User.PhotoUrl
                 })
                 .ToArrayAsync();
-        
-        
+
+        public async Task<ApiResult> ToggleLikeAsync(Guid postId, Guid currentUserId)
+        {
+            var postExists = await context.Posts.AnyAsync(p => p.Id == postId);
+
+            if (!postExists)
+                return ApiResult.Fail("Post not found");
+
+            try
+            {
+                var like = await context.Likes.FirstOrDefaultAsync(c => c.PostId == postId && c.UserId == currentUserId);
+
+                if(like is null)
+                {
+                    like = new Like
+                    {
+                         PostId = postId,
+                          UserId = currentUserId
+                    };
+
+                    context.Likes.Add(like);
+                }
+                else
+                {
+                    context.Likes.Remove(like);
+                }
+
+                await context.SaveChangesAsync();
+
+                return ApiResult.Success();
+            }
+            catch (Exception ex)
+            {
+                return ApiResult.Fail(ex.Message);
+            }
+
+        }
+
+        public async Task<ApiResult> ToggleBookMarkAsync(Guid postId, Guid currentUserId)
+        {
+            var postExists = await context.Posts.AnyAsync(p => p.Id == postId);
+
+            if (!postExists)
+                return ApiResult.Fail("Post not found");
+
+            try
+            {
+                var bookMark = await context.BookMarks.FirstOrDefaultAsync(c => c.PostId == postId && c.UserId == currentUserId);
+
+                if (bookMark is null)
+                {
+                    bookMark = new BookMark
+                    {
+                        PostId = postId,
+                        UserId = currentUserId
+                    };
+
+                    context.BookMarks.Add(bookMark);
+                }
+                else
+                {
+                    context.BookMarks.Remove(bookMark);
+                }
+
+                await context.SaveChangesAsync();
+
+                return ApiResult.Success();
+            }
+            catch (Exception ex)
+            {
+                return ApiResult.Fail(ex.Message);
+            }
+
+        }
+
+        public async Task<ApiResult> DeletePostAsybc(Guid postId, Guid currentUserId)
+        {
+            try
+            {
+                var post = await context.Posts.FindAsync(postId);
+
+                if (post is null)
+                    return ApiResult.Fail("Post not found");
+
+                if (post.UserId != currentUserId)
+                    return ApiResult.Fail("You can delete your own posts only");
+
+                context.Posts.Remove(post);
+
+                await context.SaveChangesAsync();
+
+                return ApiResult.Success();
+            }
+            catch (Exception ex)
+            {
+                return ApiResult.Fail(ex.Message);
+            }
+        }
 
 
     }
