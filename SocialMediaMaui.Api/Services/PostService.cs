@@ -8,14 +8,12 @@ namespace SocialMediaMaui.Api.Services
     public class PostService
     {
         private readonly DataContext context;
-        private readonly IWebHostEnvironment hostEnvironment;
-        private readonly IConfiguration configuration;
+        private readonly PhotoUploadService photoUploadService;
 
-        public PostService(DataContext context, IWebHostEnvironment hostEnvironment, IConfiguration configuration)
+        public PostService(DataContext context, PhotoUploadService photoUploadService)
         {
             this.context = context;
-            this.hostEnvironment = hostEnvironment;
-            this.configuration = configuration;
+            this.photoUploadService = photoUploadService;
         }
 
         public async Task<ApiResult> SavePostAsync(SavePostDto savePostDto, Guid userId)
@@ -35,7 +33,7 @@ namespace SocialMediaMaui.Api.Services
                 // Save image if provided.
                 if (savePostDto.Photo != null)
                 {
-                    (post.PhotoPath, post.PhotoUrl) = await SavePostPhotoAsync(savePostDto.Photo, userId);
+                    (post.PhotoPath, post.PhotoUrl) = await photoUploadService.SaveUserPhotoAsync(savePostDto.Photo, "uploads", "images", "users", userId.ToString(), "posts");
                 }
 
                 context.Posts.Add(post);
@@ -58,7 +56,7 @@ namespace SocialMediaMaui.Api.Services
                 {
                     existingPhotoPath = post.PhotoPath;
 
-                    (post.PhotoPath, post.PhotoUrl) = await SavePostPhotoAsync(savePostDto.Photo, userId);
+                    (post.PhotoPath, post.PhotoUrl) = await photoUploadService.SaveUserPhotoAsync(savePostDto.Photo, "uploads", "images", "users", userId.ToString(), "posts");
                 }
                 else
                 {
@@ -88,30 +86,6 @@ namespace SocialMediaMaui.Api.Services
             {
                 return ApiResult.Fail(ex.Message);
             }
-        }
-
-        private async Task<(string PhotoPath, string PhotoUrl)> SavePostPhotoAsync(IFormFile photo, Guid userId)
-        {
-            var targetFolder = Path.Combine(hostEnvironment.WebRootPath, "uploads", "images", "users", userId.ToString(), "posts");
-
-            if (!Directory.Exists(targetFolder))
-            {
-                Directory.CreateDirectory(targetFolder);
-            }
-
-            var extension = Path.GetExtension(photo.FileName);
-            var newPhotoName = $"{Guid.NewGuid()}_{DateTime.UtcNow.Ticks}{extension}";
-
-            var fullPhotoPath = Path.Combine(targetFolder, newPhotoName);
-
-            using FileStream fs = File.Create(fullPhotoPath);
-            await photo.CopyToAsync(fs);
-
-            var domainUrl = configuration.GetValue<string>("Domain").TrimEnd('/');
-
-            var photoUrl = $"{domainUrl}/uploads/images/users/{userId}/posts/{newPhotoName}";
-
-            return (fullPhotoPath, photoUrl);
         }
 
         //public async Task<PostDto[]> GetPostDtosAsync(int startIndex, int pageSize, Guid currentUserId)

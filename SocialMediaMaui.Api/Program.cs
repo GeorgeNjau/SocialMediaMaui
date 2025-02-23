@@ -18,7 +18,9 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddTransient<AuthService>()
                 .AddTransient<PostService>()
-                .AddTransient<IPasswordHasher<User>, PasswordHasher<User>>();
+                .AddTransient<IPasswordHasher<User>, PasswordHasher<User>>()
+                .AddTransient<UserService>()
+                .AddTransient<PhotoUploadService>();
 
 var app = builder.Build();
 

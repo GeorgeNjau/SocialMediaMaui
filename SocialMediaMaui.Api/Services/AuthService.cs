@@ -14,15 +14,14 @@ namespace SocialMediaMaui.Api.Services
     {
         private readonly DataContext context;
         private readonly IPasswordHasher<User> passwordHasher;
-        private readonly IWebHostEnvironment hostEnvironment;
+        private readonly PhotoUploadService photoUploadService;
         private readonly IConfiguration configuration;
 
-        public AuthService(DataContext context, IPasswordHasher<User> passwordHasher, IWebHostEnvironment hostEnvironment,
-            IConfiguration configuration)
+        public AuthService(DataContext context, IPasswordHasher<User> passwordHasher, PhotoUploadService photoUploadService, IConfiguration configuration)
         {
             this.context = context;
             this.passwordHasher = passwordHasher;
-            this.hostEnvironment = hostEnvironment;
+            this.photoUploadService = photoUploadService;
             this.configuration = configuration;
         }
 
@@ -61,7 +60,7 @@ namespace SocialMediaMaui.Api.Services
 
             try
             {
-                var (photoPath, photoUrl) = await SaveUserPhotoAsync(photo);
+                var (photoPath, photoUrl) = await photoUploadService.SaveUserPhotoAsync(photo, "uploads", "images", "users");
                 user.PhotoPath = photoPath;
                 user.PhotoUrl = photoUrl;
 
@@ -75,30 +74,6 @@ namespace SocialMediaMaui.Api.Services
             {
                 return ApiResult.Fail(ex.Message);
             }
-        }
-
-        private async Task<(string PhotoPath, string PhotoUrl)> SaveUserPhotoAsync(IFormFile photo)
-        {
-            var targetFolder = Path.Combine(hostEnvironment.WebRootPath, "uploads", "images", "users");
-
-            if(!Directory.Exists(targetFolder))
-            {
-                Directory.CreateDirectory(targetFolder);
-            }
-
-            var extension = Path.GetExtension(photo.FileName);
-            var newPhotoName = $"{Guid.NewGuid()}_{DateTime.UtcNow.Ticks}{extension}";
-
-            var fullPhotoPath = Path.Combine(targetFolder, newPhotoName);
-
-            using FileStream fs = File.Create(fullPhotoPath);
-            await photo.CopyToAsync(fs);
-
-            var domainUrl = configuration.GetValue<string>("Domain").TrimEnd('/');
-
-            var photoUrl = $"{domainUrl}/uploads/images/users/{newPhotoName}";
-
-            return (fullPhotoPath, photoUrl);
         }
 
         public async Task<ApiResult<LoginResponseDto>> LoginAsync(LoginDto loginDto)
