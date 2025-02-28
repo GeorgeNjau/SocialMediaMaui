@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SocialMediaMaui.Api.Data;
 using SocialMediaMaui.Api.Data.Entities;
+using SocialMediaMaui.Api.EndPoints;
 using SocialMediaMaui.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +37,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.ma
+  
 
 app.Run();
 
