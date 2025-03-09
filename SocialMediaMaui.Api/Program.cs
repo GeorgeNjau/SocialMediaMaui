@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using SocialMediaMaui.Api.Data;
 using SocialMediaMaui.Api.Data.Entities;
 using SocialMediaMaui.Api.EndPoints;
@@ -23,6 +26,30 @@ builder.Services.AddTransient<AuthService>()
                 .AddTransient<UserService>()
                 .AddTransient<PhotoUploadService>();
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+    {
+        var issuer = builder.Configuration.GetValue<string>("Jwt:Issuer");
+        var secretKey = builder.Configuration.GetValue<string>("Jwt:SecretKey");
+        var securityKey = System.Text.Encoding.UTF8.GetBytes(secretKey);
+        var symetricKey = new SymmetricSecurityKey(securityKey);
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidIssuer = issuer,
+            ValidateIssuer = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = symetricKey
+        };
+    });
+
+builder.Services.AddAuthorization();
+
+
 var app = builder.Build();
 
 #if DEBUG
@@ -38,8 +65,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.ma
-  
+app.UseAuthentication()
+    .UseAuthorization();
+
+app.MapAuthEndPoints()
+    .MapUserEndPoints()
+   .MapPostEndPoints();
 
 app.Run();
 

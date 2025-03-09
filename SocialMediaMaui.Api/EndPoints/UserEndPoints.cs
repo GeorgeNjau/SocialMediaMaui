@@ -7,7 +7,7 @@ namespace SocialMediaMaui.Api.EndPoints
 {
     public static class UserEndPoints
     {
-        public static IEndpointRouteBuilder MapAuthEndPoints(this IEndpointRouteBuilder app)
+        public static IEndpointRouteBuilder MapUserEndPoints(this IEndpointRouteBuilder app)
         {
             var userGroup = app.MapGroup("/api/auth")
                 .RequireAuthorization()

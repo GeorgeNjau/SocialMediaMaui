@@ -7,7 +7,7 @@ namespace SocialMediaMaui.Api.EndPoints
 {
     public static class PostsEndPoints
     {
-        public static async Task<IEndpointRouteBuilder> MapAuthEndPoints(this IEndpointRouteBuilder app)
+        public static async Task<IEndpointRouteBuilder> MapPostEndPoints(this IEndpointRouteBuilder app)
         {
             var postsGroup = app.MapGroup("/api/posts")
                             .RequireAuthorization()
