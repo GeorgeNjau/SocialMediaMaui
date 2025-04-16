@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SocialMediaMaui.Api.Data;
 using SocialMediaMaui.Api.Data.Entities;
@@ -79,7 +78,7 @@ static void AutoMigrateDb(IServiceProvider provider)
 {
     var scope = provider.CreateScope();
     var dataContext = scope.ServiceProvider.GetRequiredService<DataContext>();
-    if(dataContext.Database.GetPendingMigrations().Any())
+    if (dataContext.Database.GetPendingMigrations().Any())
     {
         dataContext.Database.Migrate();
     }

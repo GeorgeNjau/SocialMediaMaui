@@ -136,7 +136,6 @@ namespace SocialMediaMaui.Api.Services
                 .ToArrayAsync();
 
             return posts;
-
         }
 
         public async Task<ApiResult<CommentDto>> SaveCommentAsync(SaveCommentDto dto, LoggedInUser currentUser)
