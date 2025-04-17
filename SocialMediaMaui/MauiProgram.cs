@@ -21,6 +21,15 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
+        ConfigureRefit(builder.Services);
+
         return builder.Build();
     }
+
+    private static void ConfigureRefit(IServiceCollection services)
+    {
+        var baseApiUrl = "https://localhost:7022";
+        //https://tpthhr0v-7022.inc1.devtunnels.ms/swagger1
+    }
+
 }
